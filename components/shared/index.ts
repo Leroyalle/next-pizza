@@ -1,5 +1,6 @@
 import { ProductCart } from './product-cart';
 import { CheckboxFiltersGroup } from './checkbox-filters-group';
+import { ProductsGroupList } from './products-group-list';
 export { Header } from './header';
 export { Container } from './container';
 export { Title } from './title';
@@ -10,3 +11,4 @@ export { Filters } from './filters';
 export { FilterCheckbox } from './filter-checkbox';
 export { CheckboxFiltersGroup } from './checkbox-filters-group';
 export { ProductCart } from './product-cart';
+export { ProductsGroupList } from './products-group-list';
