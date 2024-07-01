@@ -1,3 +1,4 @@
+import { ProductCart } from './product-cart';
 import { CheckboxFiltersGroup } from './checkbox-filters-group';
 export { Header } from './header';
 export { Container } from './container';
@@ -8,3 +9,4 @@ export { SortBar } from './sort-bar';
 export { Filters } from './filters';
 export { FilterCheckbox } from './filter-checkbox';
 export { CheckboxFiltersGroup } from './checkbox-filters-group';
+export { ProductCart } from './product-cart';
