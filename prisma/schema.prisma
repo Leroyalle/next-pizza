@@ -10,17 +10,99 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
+
   fullName String
-  email String
+  email String @unique
   password String
+
+  cart Cart?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model Category {
+  id Int @id @default(autoincrement())
+
+  name String @unique
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt  
+}
+
 model Product {
   id Int @id @default(autoincrement())
+
   name String
   imageUrl String
+
+  ingredients Ingredient[]
+  items ProductItem[]
+
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt  
+}
+
+model ProductItem {
+    id Int @id @default(autoincrement())
+
+    size Int?
+    price Int
+    pizzaType Int?
+
+    cartItems CartItem[]
+
+   product Product @relation(fields: [productId], references: [id])
+   productId Int
+}
+model Ingredient {
+  id Int @id @default(autoincrement())
+
+  name String
+  price Int
+  imageUrl String
+
+  product Product[]
+  cartItems CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt  
+}
+
+model Cart {
+   id Int @id @default(autoincrement())
+
+   user User? @relation(fields: [userId], references: [id]) 
+   userId Int? @unique
+
+   items CartItem[]
+
+   token String
+
+   totalAmount Int @default(0)
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt  
+}
+
+model CartItem {
+  id Int @id @default(autoincrement())
+
+  cart Cart @relation(fields: [cartId], references: [id])
+  cartId Int
+
+  productItem ProductItem @relation(fields: [productItemId], references: [id])
+  productItemId Int
+
+  quantity Int
+
+  ingredients Ingredient[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt  
 }

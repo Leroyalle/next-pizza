@@ -8,7 +8,7 @@ import {
   ProductCart,
   ProductsGroupList,
 } from '@/components/shared';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui';
 import Image from 'next/image';
 
 export default function Home() {
