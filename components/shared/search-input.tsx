@@ -1,6 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { Search } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 import { useClickAway } from 'react-use';
 
@@ -28,6 +29,23 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           placeholder="Найти пиццу..."
           onFocus={() => setFocused(true)}
         />
+
+        <div
+          className={cn(
+            'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30',
+            focused && 'visible opacity-100 top-12',
+          )}>
+          <Link
+            className="px-3 py-4 hover:bg-primary/10 cursor-pointer flex gap-3 items-center"
+            href="/product/1">
+            <img
+              src="https://media.dodostatic.net/image/r:292x292/11EE7D6149EB101D8727573088FA2EFF.avif"
+              alt="Пицца"
+              className="rounded-sm h-8 w-8"
+            />
+            <span>Пицца</span>
+          </Link>
+        </div>
       </div>
     </>
   );
