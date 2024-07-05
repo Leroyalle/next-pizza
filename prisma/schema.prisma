@@ -16,6 +16,7 @@ model User {
   password String
 
   cart Cart?
+  orders Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -105,4 +106,34 @@ model CartItem {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt  
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+
+  user User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  token String
+
+  totalAmount Int
+  status StatusEnum
+  paymentId String?
+
+  items Json
+
+  fullName String
+  email String
+  phone String
+  address String
+  comment String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt  
+}
+
+enum StatusEnum {
+  PENDING
+  SUCCEEDED
+  CANCELLED
 }
