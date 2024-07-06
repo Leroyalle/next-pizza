@@ -1,9 +1,11 @@
 'use client';
 import { cn } from '@/lib/utils';
+import { Api } from '@/services/api-client';
+import { Product } from '@prisma/client';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { useClickAway } from 'react-use';
+import { useClickAway, useDebounce } from 'react-use';
 
 interface Props {
   className?: string;
@@ -11,11 +13,23 @@ interface Props {
 
 export const SearchInput: React.FC<Props> = ({ className }) => {
   const [focused, setFocused] = React.useState(false);
+  const [products, setProducts] = React.useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = React.useState('');
   const ref = React.useRef(null);
 
   useClickAway(ref, () => {
     setFocused(false);
   });
+
+  useDebounce(
+    () => {
+      Api.products.search(searchQuery).then((items) => {
+        setProducts(items);
+      });
+    },
+    250,
+    [searchQuery],
+  );
   return (
     <>
       {focused && <div className="fixed top-0 left-0 bottom-0 right-0 □ bg-black/50 z-30" />}
@@ -28,24 +42,26 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           type="text"
           placeholder="Найти пиццу..."
           onFocus={() => setFocused(true)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        <div
-          className={cn(
-            'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30',
-            focused && 'visible opacity-100 top-12',
-          )}>
-          <Link
-            className="px-3 py-4 hover:bg-primary/10 cursor-pointer flex gap-3 items-center"
-            href="/product/1">
-            <img
-              src="https://media.dodostatic.net/image/r:292x292/11EE7D6149EB101D8727573088FA2EFF.avif"
-              alt="Пицца"
-              className="rounded-sm h-8 w-8"
-            />
-            <span>Пицца</span>
-          </Link>
-        </div>
+        {products.length > 0 && (
+          <div
+            className={cn(
+              'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30',
+              focused && 'visible opacity-100 top-12',
+            )}>
+            {products.map((product) => (
+              <Link
+                className="px-3 py-4 hover:bg-primary/10 cursor-pointer flex gap-3 items-center"
+                href={`/product/${product.id}`}>
+                <img src={product.imageUrl} alt={product.name} className="rounded-sm h-8 w-8" />
+                <span>{product.name}</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
