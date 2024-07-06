@@ -1,27 +1,29 @@
-'use client';
-
+import React from 'react';
 import { Api } from '@/services/api-client';
 import { Ingredient } from '@prisma/client';
-import React from 'react';
 
-type IngredientItem = Pick<Ingredient, 'id' | 'name'>;
-
-interface ReturnProps {
-  ingredients: Ingredient[];
-}
-
-export const useFilterIngredients = (): ReturnProps => {
+export const useFilterIngredients = () => {
   const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
     async function fetchIngredients() {
       try {
-        const response = await Api.ingredients.getAll();
-        setIngredients(response);
-      } catch (err) {
-        console.log(err);
+        setLoading(true);
+        const ingredients = await Api.ingredients.getAll();
+        setIngredients(ingredients);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
+
     fetchIngredients();
   }, []);
-  return { ingredients };
+
+  return {
+    ingredients,
+    loading,
+  };
 };

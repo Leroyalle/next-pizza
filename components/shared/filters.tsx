@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import { Title } from './title';
 import { FilterCheckbox } from './filter-checkbox';
@@ -13,7 +12,7 @@ interface Props {
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients } = useFilterIngredients();
+  const { ingredients, loading } = useFilterIngredients();
 
   const items = ingredients.map((ingredient) => ({
     value: String(ingredient.id),
@@ -27,7 +26,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         <FilterCheckbox text="Новинки" value="2" />
       </div>
       <div className="mt5 border-y border-y-neutral-100 py-6 pb-7">
-        <p className="flexx gap-3 mb-5">Цена от и до:</p>
+        <p className="flex gap-3 mb-5">Цена от и до:</p>
         <div className="flex gap-3 mb-5">
           <Input type="number" placeholder="0" min={0} max={1000} defaultValue={0} />
           <Input type="number" placeholder="100" min={0} max={1000} />
@@ -40,6 +39,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         limit={3}
         defaultItems={items.slice(0, 6)}
         items={items}
+        loading={loading}
       />
     </div>
   );
