@@ -37,6 +37,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const onClickItem = () => {
     setSearchQuery('');
     setFocused(false);
+    // setProducts([]);
   };
 
   return (
