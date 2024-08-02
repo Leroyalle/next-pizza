@@ -33,7 +33,11 @@ export const Filters: React.FC<Props> = ({ className }) => {
   const [sizes, { toggle: toggleSizes }] = useSet(
     new Set<string>(searchParams.has('sizes') ? searchParams.get('sizes')?.split(',') : []),
   );
-  const [pizzaTypes, { toggle: toggleTypes }] = useSet(new Set<string>([]));
+  const [pizzaTypes, { toggle: toggleTypes }] = useSet(
+    new Set<string>(
+      searchParams.has('pizzaTypes') ? searchParams.get('pizzaTypes')?.split(',') : [],
+    ),
+  );
 
   const [price, setPrice] = React.useState<PriceProps>({
     priceFrom: Number(searchParams.get('priceFrom')) || undefined,
@@ -55,7 +59,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
   React.useEffect(() => {
     const filters = {
       ...price,
-      types: Array.from(pizzaTypes),
+      pizzaTypes: Array.from(pizzaTypes),
       sizes: Array.from(sizes),
       ingredients: Array.from(selectedIngredients),
     };
