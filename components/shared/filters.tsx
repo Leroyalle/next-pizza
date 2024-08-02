@@ -30,7 +30,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
   const searchParams = useSearchParams() as unknown as Map<keyof QueryFilters, string>;
 
   const { ingredients, loading, onAddId, selectedIngredients } = useFilterIngredients();
-  const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+  const [sizes, { toggle: toggleSizes }] = useSet(
+    new Set<string>(searchParams.has('sizes') ? searchParams.get('sizes')?.split(',') : []),
+  );
   const [pizzaTypes, { toggle: toggleTypes }] = useSet(new Set<string>([]));
 
   const [price, setPrice] = React.useState<PriceProps>({
