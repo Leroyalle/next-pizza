@@ -1,3 +1,4 @@
+import { ProductImage } from './product-image';
 export { Header } from './header';
 export { Container } from './container';
 export { Title } from './title';
@@ -10,3 +11,4 @@ export { CheckboxFiltersGroup } from './checkbox-filters-group';
 export { ProductCart } from './product-cart';
 export { ProductsGroupList } from './products-group-list';
 export { SearchInput } from './search-input';
+export { ProductImage } from './product-image';
