@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import './globals.css';
 import { Nunito } from 'next/font/google';
 
@@ -14,9 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <Head>
         <link data-rh="true" rel="icon" href="/logo.png" />
-      </head>
+      </Head>
       <body className={nunito.className}>{children}</body>
     </html>
   );

@@ -1,4 +1,5 @@
 import { ProductImage } from './product-image';
+import { ChooseProductModal } from './modals/choose-product-modal';
 export { Header } from './header';
 export { Container } from './container';
 export { Title } from './title';
@@ -12,3 +13,4 @@ export { ProductCart } from './product-cart';
 export { ProductsGroupList } from './products-group-list';
 export { SearchInput } from './search-input';
 export { ProductImage } from './product-image';
+export * from './modals';
