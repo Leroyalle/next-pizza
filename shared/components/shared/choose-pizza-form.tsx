@@ -3,7 +3,6 @@ import React from 'react';
 import { PizzaImage } from './pizza-image';
 import { Title } from './title';
 import { Button } from '../ui';
-import { ProductWithRelations } from '@/@types/prisma';
 import { GroupVariants } from './group-variants';
 import {
   mapPizzaType,
@@ -15,6 +14,7 @@ import {
 import { Ingredient, ProductItem } from '@prisma/client';
 import { IngredientItem } from './ingredient-item';
 import { useSet } from 'react-use';
+import { calcTotalPizzaPrice } from '@/shared/lib';
 
 interface Props {
   className?: string;
@@ -38,12 +38,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
   const [selectedIngredients, { toggle: onAddIngredient }] = useSet(new Set<number>([]));
 
-  const pizzaPrice =
-    items.find((item) => item.pizzaType === type && item.size === size)?.price || 0;
-  const totalIngredientsPrice = ingredients
-    .filter((ingredient) => selectedIngredients.has(ingredient.id))
-    .reduce((acc, ingredient) => acc + ingredient.price, 0);
-  const totalPrice = pizzaPrice + totalIngredientsPrice;
+  const totalPrice = calcTotalPizzaPrice(type, size, items, ingredients, selectedIngredients);
   const textDetails = `${size} см, ${mapPizzaType[type]} пицца, ингредиенты (${selectedIngredients.size})`;
 
   const filteredPizzasByType = items.filter((item) => item.pizzaType === type);
@@ -62,7 +57,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     if (!isAvailableSize && availableSize) {
       setSize(Number(availableSize.value) as PizzaSize);
     }
-  }, [type]);
+  }, [availablePizzaSizes, size, type]);
 
   return (
     <div className={cn('flex flex-1', className)}>
