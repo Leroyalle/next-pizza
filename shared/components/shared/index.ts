@@ -15,3 +15,5 @@ export * from './modals';
 export { ChooseProductForm } from './choose-product-form';
 export { ChoosePizzaForm } from './choose-pizza-form';
 export { IngredientItem } from './ingredient-item';
+export { CartButton } from './cart-button';
+export { CartDrawer } from './cart-drawer';
