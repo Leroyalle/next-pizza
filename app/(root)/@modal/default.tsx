@@ -1,11 +1,4 @@
-import React from 'react';
-
-interface Props {
-  className?: string;
-}
-const Default: React.FC<Props> = ({ className }) => {
-  console.log('default');
-
+const Default = () => {
   return null;
 };
 export default Default;
