@@ -1,5 +1,6 @@
 import { Ingredient } from '@prisma/client';
 import { mapPizzaType, PizzaSize, PizzaType } from '../constants/pizza';
+import { CartStateItem } from './get-cart-details';
 
 /**
  * Функция принимает информацию о пицце и пушит ее в массив, после чего конвертирует ее в строку
@@ -13,9 +14,9 @@ import { mapPizzaType, PizzaSize, PizzaType } from '../constants/pizza';
  */
 
 export const getCartItemDetails = (
+  ingredients: CartStateItem['ingredients'],
   pizzaType: PizzaType,
   pizzaSize: PizzaSize,
-  ingredients: Ingredient[],
 ) => {
   const details = [];
 
