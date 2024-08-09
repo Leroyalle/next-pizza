@@ -23,12 +23,15 @@ interface Props {
 }
 
 export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ className, children }) => {
-  const [totalAmount, fetchCartItems, updateCartItem, items] = useCartStore((state) => [
-    state.totalAmount,
-    state.fetchCartItems,
-    state.updateCartItem,
-    state.items,
-  ]);
+  const [totalAmount, items, fetchCartItems, updateCartItem, removeCartItem] = useCartStore(
+    (state) => [
+      state.totalAmount,
+      state.items,
+      state.fetchCartItems,
+      state.updateCartItem,
+      state.removeCartItem,
+    ],
+  );
 
   React.useEffect(() => {
     fetchCartItems();
@@ -69,6 +72,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ className
                 price={item.price}
                 quantity={item.quantity}
                 onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+                onClickRemove={() => removeCartItem(item.id)}
               />
             ))}
           </div>

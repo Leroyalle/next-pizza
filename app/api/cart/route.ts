@@ -31,6 +31,7 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json(items);
   } catch (error) {
+    console.log('[CART_PATH] Server error', error);
     return NextResponse.json({ cart: [] });
   }
 }
