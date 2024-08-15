@@ -55,6 +55,7 @@ export async function POST(req: NextRequest) {
       where: {
         cartId: userCart.id,
         productItemId: data.productItemId,
+        // TODO: сделать точную проверку наличия ингредиентов через forEach
         ingredients: {
           every: {
             id: { in: data.ingredients },

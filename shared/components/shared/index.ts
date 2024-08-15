@@ -17,3 +17,4 @@ export { ChoosePizzaForm } from './choose-pizza-form';
 export { IngredientItem } from './ingredient-item';
 export { CartButton } from './cart-button';
 export { CartDrawer } from './cart-drawer';
+export { ProductForm } from './product-form';
