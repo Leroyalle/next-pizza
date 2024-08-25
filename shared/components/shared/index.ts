@@ -26,6 +26,7 @@ export { RequiredSymbol } from './required-symbol';
 export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
 export { AddressForm } from './address-form';
+export { PayOrderTemplate } from './email-templates';
 export * from './modals';
 export * from './form';
 export * from './checkout';
