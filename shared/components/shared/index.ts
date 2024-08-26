@@ -27,6 +27,7 @@ export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
 export { AddressForm } from './address-form';
 export { PayOrderTemplate } from './email-templates';
+export { Providers } from './providers';
 export * from './modals';
 export * from './form';
 export * from './checkout';
