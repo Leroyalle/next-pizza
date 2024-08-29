@@ -5,9 +5,9 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(req: any, res: any) {
+export async function GET(req: Request) {
   try {
-    const user = await getServerSession(req, res, authOptions);
+    const user = await getServerSession({ req, ...authOptions });
 
     if (!user) {
       return NextResponse.json({ message: 'Вы не авторизованы' }, { status: 401 });
