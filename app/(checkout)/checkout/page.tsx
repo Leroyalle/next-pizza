@@ -14,10 +14,12 @@ import { useCart } from '@/shared/hooks';
 import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants';
 import { createOrder } from '@/app/actions';
 import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 export default function CheckoutPage() {
   const { totalAmount, items, updateCartItem, removeCartItem, loading } = useCart();
   const [submitting, setSubmitting] = React.useState(false);
+
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
@@ -77,10 +79,7 @@ export default function CheckoutPage() {
             </div>
 
             <div className="w-[450px]">
-              <CheckoutSidebar
-                totalAmount={totalAmount}
-                loading={loading || submitting}
-              />
+              <CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting} />
             </div>
           </div>
         </form>
