@@ -26,6 +26,15 @@ export const Stories: React.FC<Props> = ({ className }) => {
     fetchStories();
   }, []);
 
+  React.useEffect(() => {
+    if (open) {
+      document.body.classList.add('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [open]);
+
   const onClickStory = (story: IStory) => {
     setSelectedStory(story);
 
@@ -35,21 +44,23 @@ export const Stories: React.FC<Props> = ({ className }) => {
   };
 
   return (
-    <Container className={cn('flex items-center justify-between gap-2 my-10', className)}>
+    <Container className={cn('flex items-center justify-between gap-2 my-10 ', className)}>
       {stories.length === 0 &&
         [...Array(6)].map((_, index) => (
           <div key={index} className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse" />
         ))}
-      {stories.map((story) => (
-        <img
-          key={story.id}
-          onClick={() => onClickStory(story)}
-          className="rounded-md cursor-pointer"
-          height={250}
-          width={200}
-          src={story.previewImageUrl}
-        />
-      ))}
+      {stories
+        .filter((story) => story.items.length > 0)
+        .map((story) => (
+          <img
+            key={story.id}
+            onClick={() => onClickStory(story)}
+            className="rounded-md cursor-pointer"
+            height={250}
+            width={200}
+            src={story.previewImageUrl}
+          />
+        ))}
       {open && (
         <div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
           <div className="relative" style={{ width: 520 }}>
