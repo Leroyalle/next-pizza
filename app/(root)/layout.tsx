@@ -3,7 +3,7 @@ import { Header } from '@/shared/components/shared';
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
-  title: 'More Pro Pizza',
+  title: 'Pizza Slice',
 };
 
 export default function HomeLayout({
