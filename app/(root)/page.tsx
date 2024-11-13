@@ -6,7 +6,6 @@ import {
   ProductsGroupList,
   Stories,
 } from '@/shared/components/shared';
-import { prisma } from '@/prisma/prisma-client';
 import { Suspense } from 'react';
 import { findPizzas, GetSearchParams } from '@/shared/lib/find-pizzas';
 

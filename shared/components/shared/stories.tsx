@@ -62,7 +62,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
           />
         ))}
       {open && (
-        <div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
+        <div className="fixed inset-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
           <div className="relative" style={{ width: 520 }}>
             <button className="absolute -right-10 -top-5 z-30" onClick={() => setOpen(false)}>
               <X className="absolute top-0 right-0 w-8 h-8 text-white/50" />
